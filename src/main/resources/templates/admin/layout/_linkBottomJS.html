@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Template</title>
+    <!-- Add any additional head elements here -->
+</head>
+<body>
+<div th:fragment="linkBottomJS">
+    <!--   Core JS Files   -->
+    <script th:src="@{/admin/assets_template/js/core/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/admin/assets_template/js/core/popper.min.js}"></script>
+    <script th:src="@{/admin/assets_template/js/core/bootstrap.min.js}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script th:src="@{/admin/assets_template/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+    <!-- Chart JS -->
+    <script th:src="@{/admin/assets_template/js/plugin/chart.js/chart.min.js}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script th:src="@{/admin/assets_template/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+
+    <!-- Chart Circle -->
+    <script th:src="@{/admin/assets_template/js/plugin/chart-circle/circles.min.js}"></script>
+
+    <!-- Datatables -->
+    <script th:src="@{/admin/assets_template/js/plugin/datatables/datatables.min.js}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script th:src="@{/admin/assets_template/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script th:src="@{/admin/assets_template/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+    <script th:src="@{/admin/assets_template/js/plugin/jsvectormap/world.js}"></script>
+
+    <!-- Sweet Alert -->
+    <script th:src="@{/admin/assets_template/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script th:src="@{/admin/assets_template/js/kaiadmin.min.js}"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script th:src="@{/admin/assets_template/js/setting-demo.js}"></script>
+    <script th:src="@{/admin/assets_template/js/demo.js}"></script>
+    <script>
+        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#177dff",
+            fillColor: "rgba(23, 125, 255, 0.14)",
+        });
+
+        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#f3545d",
+            fillColor: "rgba(243, 84, 93, .14)",
+        });
+
+        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#ffa534",
+            fillColor: "rgba(255, 165, 52, .14)",
+        });
+
+        $("#lineChart4").sparkline([102, 109, 120, 99, 110, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "rgba(255, 255, 255, .5)",
+            fillColor: "rgba(255, 255, 255, .15)",
+        });
+
+        $("#lineChart5").sparkline([99, 125, 122, 105, 110, 124, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "rgba(255, 255, 255, .5)",
+            fillColor: "rgba(255, 255, 255, .15)",
+        });
+
+        $("#lineChart6").sparkline([105, 103, 123, 100, 95, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "rgba(255, 255, 255, .5)",
+            fillColor: "rgba(255, 255, 255, .15)",
+        });
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+        lang="zxx"
+        xmlns:th="https://www.thymeleaf.org/"
+        th:fragment="areas(body)"
+>
+<head th:replace="~{/client/layout/_head.html :: head}"></head>
+<body>
+
+<main th:replace="${body}"></main>
+
+<footer th:replace="~{/client/layout/_footer.html :: footer}"></footer>
+
+<div th:replace="~{/client/layout/_search.html :: search}"></div>
+
+<script th:src="@{/client/assets_template/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/client/assets_template/js/bootstrap.min.js}"></script>
+<script th:src="@{/client/assets_template/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/client/assets_template/js/jquery.nicescroll.min.js}"></script>
+<script th:src="@{/client/assets_template/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/client/assets_template/js/jquery.countdown.min.js}"></script>
+<script th:src="@{/client/assets_template/js/jquery.slicknav.js}"></script>
+<script th:src="@{/client/assets_template/js/mixitup.min.js}"></script>
+<script th:src="@{/client/assets_template/js/owl.carousel.min.js}"></script>
+<script th:src="@{/client/assets_template/js/main.js}"></script>
+</body>
+</html>
