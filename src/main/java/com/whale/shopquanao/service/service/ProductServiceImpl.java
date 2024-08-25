@@ -10,6 +10,7 @@ import com.whale.shopquanao.repository.ProductRepository;
 import com.whale.shopquanao.service.iservice.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -50,6 +51,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse storeProduct(ProductRequest productRequest) {
         try {
+            if (productRepository.existsByProductName(productRequest.getProductName())) {
+                throw new DuplicateKeyException("Duplicate product name " + productRequest.getProductName());
+            }
+
             if (!categoryRepository.existsById(productRequest.getIdCategory())) {
                 throw new DataNotFoundException("Category not found with id: " + productRequest.getIdCategory());
             }
@@ -66,6 +71,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse updateProduct(Integer id, ProductRequest productRequest) {
         try {
+            if (productRepository.existsByProductName(productRequest.getProductName())) {
+                throw new DuplicateKeyException("Duplicate product name " + productRequest.getProductName());
+            }
+
             if (!categoryRepository.existsById(productRequest.getIdCategory())) {
                 throw new DataNotFoundException("Category not found with id: " + productRequest.getIdCategory());
             }

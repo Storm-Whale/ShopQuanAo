@@ -1,5 +1,6 @@
 package com.whale.shopquanao.dto.mapper;
 
+import com.whale.shopquanao.dto.request.ProductDetailRequest;
 import com.whale.shopquanao.dto.request.ProductRequest;
 import com.whale.shopquanao.dto.response.ProductDetailResponse;
 import com.whale.shopquanao.dto.response.ProductImageResponse;
@@ -7,8 +8,11 @@ import com.whale.shopquanao.dto.response.ProductResponse;
 import com.whale.shopquanao.entity.Product;
 import com.whale.shopquanao.entity.ProductDetail;
 import com.whale.shopquanao.entity.ProductImage;
+import com.whale.shopquanao.entity.Size;
 import com.whale.shopquanao.repository.CategoryRepository;
+import com.whale.shopquanao.repository.ProductDetailRepository;
 import com.whale.shopquanao.repository.ProductRepository;
+import com.whale.shopquanao.repository.SizeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +24,9 @@ import java.util.List;
 public class ProductMapper {
 
     private final CategoryRepository categoryRepository;
+    private final SizeRepository sizeRepository;
     private final ProductRepository productRepository;
+    private final ProductDetailRepository productDetailRepository;
 
     public ProductImageResponse toProductImageResponse(ProductImage productImage) {
         return ProductImageResponse.builder()
@@ -75,6 +81,31 @@ public class ProductMapper {
                 .category(categoryRepository.findById(productRequest.getIdCategory())
                         .orElse(null))
                 .listProductDetail(existingProduct != null ? existingProduct.getListProductDetail() : null)
+                .build();
+    }
+
+    public ProductDetail toProductDetail(ProductDetailRequest productDetailRequest) {
+        Product product = productRepository.findById(productDetailRequest.getIdProduct()).orElse(null);
+        Size size = sizeRepository.findById(productDetailRequest.getIdSize()).orElse(null);
+        return ProductDetail.builder()
+                .product(product)
+                .size(size)
+                .price(productDetailRequest.getPrice())
+                .stockQuantity(productDetailRequest.getStockQuantity())
+                .build();
+    }
+
+    public ProductDetail toProductDetail(Integer id, ProductDetailRequest productDetailRequest) {
+        ProductDetail existingProductDetail = productDetailRepository.findById(id).orElse(null);
+        Product product = productRepository.findById(productDetailRequest.getIdProduct()).orElse(null);
+        Size size = sizeRepository.findById(productDetailRequest.getIdSize()).orElse(null);
+        return ProductDetail.builder()
+                .id(id)
+                .product(product)
+                .size(size)
+                .price(productDetailRequest.getPrice())
+                .stockQuantity(productDetailRequest.getStockQuantity())
+                .listProductImage(existingProductDetail != null ? existingProductDetail.getListProductImage() : null)
                 .build();
     }
 }
