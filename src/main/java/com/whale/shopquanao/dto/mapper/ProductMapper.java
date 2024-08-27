@@ -1,6 +1,7 @@
 package com.whale.shopquanao.dto.mapper;
 
 import com.whale.shopquanao.dto.request.ProductDetailRequest;
+import com.whale.shopquanao.dto.request.ProductImageRequest;
 import com.whale.shopquanao.dto.request.ProductRequest;
 import com.whale.shopquanao.dto.response.ProductDetailResponse;
 import com.whale.shopquanao.dto.response.ProductImageResponse;
@@ -9,6 +10,7 @@ import com.whale.shopquanao.entity.Product;
 import com.whale.shopquanao.entity.ProductDetail;
 import com.whale.shopquanao.entity.ProductImage;
 import com.whale.shopquanao.entity.Size;
+import com.whale.shopquanao.exception.DataNotFoundException;
 import com.whale.shopquanao.repository.CategoryRepository;
 import com.whale.shopquanao.repository.ProductDetailRepository;
 import com.whale.shopquanao.repository.ProductRepository;
@@ -106,6 +108,14 @@ public class ProductMapper {
                 .price(productDetailRequest.getPrice())
                 .stockQuantity(productDetailRequest.getStockQuantity())
                 .listProductImage(existingProductDetail != null ? existingProductDetail.getListProductImage() : null)
+                .build();
+    }
+
+    public ProductImage toProductImage(ProductImageRequest productImageRequest) {
+        ProductDetail existingProduct = productDetailRepository.findById(productImageRequest.getIdProductDetail()).orElse(null);
+        return ProductImage.builder()
+                .productDetail(existingProduct)
+                .imageUrl(productImageRequest.getImageUrl())
                 .build();
     }
 }

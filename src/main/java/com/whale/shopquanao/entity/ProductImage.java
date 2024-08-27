@@ -16,6 +16,9 @@ import java.time.Instant;
 @AllArgsConstructor
 @Table(name = "PRODUCT_IMAGES", schema = "dbo")
 public class ProductImage extends BaseEntity {
+
+    public static final int MAXIMUM_IMAGES_PER_PRODUCT = 5;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "image_id", nullable = false)
