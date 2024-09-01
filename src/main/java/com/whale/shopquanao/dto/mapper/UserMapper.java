@@ -14,8 +14,10 @@ public interface UserMapper {
 
     UserResponse toUserResponse(User user);
 
-    User toUser(UserRequest userRequest);
-
     User toUser(Integer id, UserRequest userRequest);
+
+    default User toUser(UserRequest userRequest) {
+        return toUser(null, userRequest);
+    }
 }
 
