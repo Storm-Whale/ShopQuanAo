@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -33,19 +34,21 @@ public class ProductMapper {
     public ProductImageResponse toProductImageResponse(ProductImage productImage) {
         return ProductImageResponse.builder()
                 .id(productImage.getId())
-                .idProductDetail(productImage.getProductDetail().getId())
+                .idProductDetail(productImage.getProductDetail() != null ? productImage.getProductDetail().getId() : null)
                 .imageUrl(productImage.getImageUrl())
                 .build();
     }
 
     public ProductDetailResponse toProductDetailResponse(ProductDetail productDetail) {
         List<ProductImageResponse> productImageResponse = new ArrayList<>();
-        productDetail.getListProductImage().forEach(
-                productImage -> productImageResponse.add(toProductImageResponse(productImage))
-        );
+        if (productDetail.getListProductImage() != null && !productDetail.getListProductImage().isEmpty()) {
+            productImageResponse = productDetail.getListProductImage().stream()
+                    .map(this::toProductImageResponse)
+                    .collect(Collectors.toList());
+        }
         return ProductDetailResponse.builder()
                 .id(productDetail.getId())
-                .sizeName(productDetail.getSize().getSizeName())
+                .sizeName(productDetail.getSize() != null ? productDetail.getSize().getSizeName() : null)
                 .price(productDetail.getPrice())
                 .stockQuantity(productDetail.getStockQuantity())
                 .listImage(productImageResponse)
@@ -54,18 +57,20 @@ public class ProductMapper {
 
     public ProductResponse toProductResponse(Product product) {
         List<ProductDetailResponse> productDetailResponse = new ArrayList<>();
-        product.getListProductDetail().forEach(
-                productDetail -> productDetailResponse.add(toProductDetailResponse(productDetail))
-        );
+        if (product.getListProductDetail() != null && !product.getListProductDetail().isEmpty()) {
+            productDetailResponse = product.getListProductDetail().stream()
+                    .map(this::toProductDetailResponse)
+                    .collect(Collectors.toList());
+        }
         return ProductResponse.builder()
                 .id(product.getId())
                 .productName(product.getProductName())
                 .description(product.getDescription())
-                .categoryName(product.getCategory().getCategoryName())
+                .categoryName(product.getCategory() != null ? product.getCategory().getCategoryName() : null)
                 .listProductDetailResponse(productDetailResponse)
                 .build();
     }
-
+    
     public Product toProduct(ProductRequest productRequest) {
         return Product.builder()
                 .productName(productRequest.getProductName())

@@ -7,6 +7,7 @@ import com.whale.shopquanao.entity.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,10 +18,12 @@ public class CategoryMapper {
     private final ProductMapper productMapper;
 
     public CategoryResponse toCategoryResponse(Category category) {
-        List<ProductResponse> listProductResponse = category.getListProduct().stream()
-                .map(productMapper::toProductResponse)
-                .collect(Collectors.toList());
-
+        List<ProductResponse> listProductResponse = new ArrayList<>();
+        if (category.getListProduct() != null && !category.getListProduct().isEmpty()) {
+            listProductResponse = category.getListProduct().stream()
+                    .map(productMapper::toProductResponse)
+                    .toList();
+        }
         return CategoryResponse.builder()
                 .id(category.getId())
                 .categoryName(category.getCategoryName())

@@ -14,55 +14,58 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/category")
+@RequestMapping("/category")
 @RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping(value = "/index")
+    @GetMapping("/index")
     public ResponseEntity<List<CategoryResponse>> index() {
         List<CategoryResponse> categories = categoryService.getAllCategory();
         return ResponseEntity.ok(categories);
     }
 
-    @GetMapping(value = "/find_by_id/{id}")
-    public ResponseEntity<CategoryResponse> findById(@PathVariable(name = "id") Integer id) {
+    @GetMapping("/find_by_id/{id}")
+    public ResponseEntity<CategoryResponse> findById(@PathVariable("id") Integer id) {
         CategoryResponse category = categoryService.getCategoryById(id);
         return ResponseEntity.ok(category);
     }
 
-    @PostMapping(value = "/store")
+    @PostMapping("/store")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> store(@Valid @RequestBody CategoryRequest categoryRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            List<String> errors = bindingResult.getFieldErrors().stream()
-                    .map(FieldError::getDefaultMessage)
-                    .toList();
-            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            return handleValidationErrors(bindingResult);
         }
         CategoryResponse categoryResponse = categoryService.storeCategory(categoryRequest);
-        return new ResponseEntity<>(categoryResponse, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryResponse);
     }
 
-    @PutMapping(value = "/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(
-            @PathVariable(name = "id") Integer id,
+            @PathVariable("id") Integer id,
             @Valid @RequestBody CategoryRequest categoryRequest,
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            List<String> errors = bindingResult.getFieldErrors().stream()
-                    .map(FieldError::getDefaultMessage)
-                    .toList();
-            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            return handleValidationErrors(bindingResult);
         }
         CategoryResponse categoryResponse = categoryService.updateCategory(id, categoryRequest);
         return ResponseEntity.ok(categoryResponse);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable(name = "id") Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
         categoryService.deleteCategory(id);
         return ResponseEntity.ok("Delete category successfully with id: " + id);
+    }
+
+    // Phương thức riêng để xử lý lỗi ràng buộc
+    private ResponseEntity<List<String>> handleValidationErrors(BindingResult bindingResult) {
+        List<String> errors = bindingResult.getFieldErrors().stream()
+                .map(FieldError::getDefaultMessage)
+                .toList();
+        return ResponseEntity.badRequest().body(errors);
     }
 }

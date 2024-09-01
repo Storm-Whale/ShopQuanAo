@@ -18,9 +18,12 @@ public class SizeMapper {
     private final ProductMapper productMapper;
 
     public SizeResponse toSizeResponse(Size size) {
-        List<ProductDetailResponse> listProductDetailResponse = size.getListProductDetail().stream()
-                .map(productMapper::toProductDetailResponse)
-                .collect(Collectors.toList());
+        List<ProductDetailResponse> listProductDetailResponse = new ArrayList<>();
+        if (size.getListProductDetail() != null && !size.getListProductDetail().isEmpty()) {
+            listProductDetailResponse = size.getListProductDetail().stream()
+                    .map(productMapper::toProductDetailResponse)
+                    .collect(Collectors.toList());
+        }
         return SizeResponse.builder()
                 .id(size.getId())
                 .sizeName(size.getSizeName())
