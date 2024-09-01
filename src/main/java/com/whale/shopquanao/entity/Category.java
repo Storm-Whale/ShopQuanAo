@@ -3,9 +3,7 @@ package com.whale.shopquanao.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Nationalized;
 
-import java.time.Instant;
 import java.util.List;
 
 @Getter

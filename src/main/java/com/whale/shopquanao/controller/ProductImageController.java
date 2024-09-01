@@ -34,8 +34,7 @@ public class ProductImageController {
     @PostMapping(value = "/upload-image/{productDetailId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> store(
             @PathVariable(name = "productDetailId") Integer productDetailId,
-            @RequestParam(name = "image") List<MultipartFile> imageFiles
-    ) throws IOException {
+            @RequestParam(name = "image") List<MultipartFile> imageFiles) throws IOException {
         ProductDetailResponse existingProductDetail = productDetailService.getProductDetailById(productDetailId);
         List<ProductImageResponse> listProductImage = new ArrayList<>();
         if (imageFiles == null || imageFiles.isEmpty()) {
@@ -47,7 +46,8 @@ public class ProductImageController {
         for (MultipartFile file : imageFiles) {
             if (file != null && file.getSize() > 0) {
                 if (file.getSize() > 10 * 1024 * 1024) {
-                    return new ResponseEntity<>("File is too large! Maximum size is 10MB", HttpStatus.PAYLOAD_TOO_LARGE);
+                    return new ResponseEntity<>("File is too large! Maximum size is 10MB",
+                            HttpStatus.PAYLOAD_TOO_LARGE);
                 }
                 if (!isImageFile(file)) {
                     return new ResponseEntity<>("File must be an image", HttpStatus.UNSUPPORTED_MEDIA_TYPE);
@@ -57,8 +57,7 @@ public class ProductImageController {
                         ProductImageRequest.builder()
                                 .idProductDetail(existingProductDetail.getId())
                                 .imageUrl(fileName)
-                                .build()
-                ));
+                                .build()));
             }
         }
         return new ResponseEntity<>(listProductImage, HttpStatus.OK);
@@ -73,7 +72,14 @@ public class ProductImageController {
         if (!isImageFile(file) || file.getOriginalFilename() == null) {
             throw new RuntimeException("You can only upload image file");
         }
-        String filename = StringUtils.cleanPath(file.getOriginalFilename());
+
+        String filename = file.getOriginalFilename();
+        if (filename != null) {// +
+            filename = StringUtils.cleanPath(filename);
+        } else {
+            throw new RuntimeException("Filename is null");
+        }
+
         String uniqueFilename = UUID.randomUUID() + "_" + filename;
         Path uploadDir = Paths.get("upload");
         if (!Files.exists(uploadDir)) {

@@ -3,8 +3,6 @@ package com.whale.shopquanao.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Getter
 @Builder
 @Setter

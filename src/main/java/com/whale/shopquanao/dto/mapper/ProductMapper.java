@@ -10,7 +10,6 @@ import com.whale.shopquanao.entity.Product;
 import com.whale.shopquanao.entity.ProductDetail;
 import com.whale.shopquanao.entity.ProductImage;
 import com.whale.shopquanao.entity.Size;
-import com.whale.shopquanao.exception.DataNotFoundException;
 import com.whale.shopquanao.repository.CategoryRepository;
 import com.whale.shopquanao.repository.ProductDetailRepository;
 import com.whale.shopquanao.repository.ProductRepository;

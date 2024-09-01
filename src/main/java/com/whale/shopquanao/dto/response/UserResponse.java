@@ -2,8 +2,6 @@ package com.whale.shopquanao.dto.response;
 
 import lombok.*;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor

@@ -1,6 +1,5 @@
 package com.whale.shopquanao.dto.request;
 
-import com.whale.shopquanao.entity.Category;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
