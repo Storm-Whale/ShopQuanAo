@@ -22,11 +22,13 @@ public class ProductDetail extends BaseEntity {
 
     @NotNull
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @NotNull
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "size_id", nullable = false)
     private Size size;
 
@@ -38,7 +40,6 @@ public class ProductDetail extends BaseEntity {
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "productDetail")
     private List<ProductImage> listProductImage;
 }

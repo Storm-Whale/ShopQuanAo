@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Set;
+
 @Getter
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -13,5 +15,6 @@ public class RoleResponse {
     int roleId;
     String roleName;
     String description;
-//    List<UserResponse> users;
+    Set<UserSummary> userSummaries;
 }
+

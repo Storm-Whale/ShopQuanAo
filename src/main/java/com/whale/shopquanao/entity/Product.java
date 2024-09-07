@@ -36,10 +36,10 @@ public class Product extends BaseEntity {
 
     @NotNull
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<ProductDetail> listProductDetail;
 }

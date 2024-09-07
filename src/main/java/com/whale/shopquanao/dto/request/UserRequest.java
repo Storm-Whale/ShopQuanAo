@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Getter
-@Builder
 @Setter
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -16,5 +15,5 @@ public class UserRequest {
     String fullName;
     String address;
     String phoneNumber;
-//    List<Integer> roleIds;
+    Integer idRole;
 }

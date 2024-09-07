@@ -2,6 +2,8 @@ package com.whale.shopquanao.dto.response;
 
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,5 +17,5 @@ public class UserResponse {
     private String fullName;
     private String address;
     private String phoneNumber;
-//    private List<RoleResponse> roles;
+    private Set<RoleSummary> roleSummaries;
 }

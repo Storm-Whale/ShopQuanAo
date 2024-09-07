@@ -1,10 +1,15 @@
 package com.whale.shopquanao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,7 +18,8 @@ import org.hibernate.annotations.Nationalized;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ROLES")
-public class Role extends BaseEntity{
+public class Role extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id", nullable = false)
@@ -30,7 +36,7 @@ public class Role extends BaseEntity{
     @Column(name = "description")
     private String description;
 
-//    @JsonIgnore
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<User> users = new HashSet<>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
 }

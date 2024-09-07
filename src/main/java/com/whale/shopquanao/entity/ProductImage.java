@@ -1,5 +1,6 @@
 package com.whale.shopquanao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,6 +25,7 @@ public class ProductImage extends BaseEntity {
 
     @NotNull
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "product_detail_id", nullable = false)
     private ProductDetail productDetail;
 

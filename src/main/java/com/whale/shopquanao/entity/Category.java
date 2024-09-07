@@ -22,7 +22,6 @@ public class Category extends BaseEntity{
     @Column(name = "category_name", nullable = false)
     private String categoryName;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Product> listProduct;
 }

@@ -27,7 +27,6 @@ public class Size extends BaseEntity{
     @Column(name = "size_name", nullable = false, length = 50)
     private String sizeName;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "size")
     private List<ProductDetail> listProductDetail;
 }

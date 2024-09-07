@@ -1,19 +1,24 @@
 package com.whale.shopquanao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "USERS")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
@@ -49,12 +54,12 @@ public class User extends BaseEntity{
     @Column(name = "phone_number", length = 15)
     private String phoneNumber;
 
-//    @JsonIgnore
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id")
-//    )
-//    private Set<Role> roles = new HashSet<>();
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 }
