@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private User saveUserWithRole(Integer id, UserRequest userRequest, Role role) {
-        User user, lastUpdated;
+        User user;
         if (id == null) {
             user = userMapper.toUser(userRequest);
         } else {

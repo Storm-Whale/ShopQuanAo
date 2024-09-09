@@ -2,14 +2,10 @@ package com.whale.shopquanao.dto.mapper;
 
 import com.whale.shopquanao.dto.request.UserRequest;
 import com.whale.shopquanao.dto.response.UserResponse;
-import com.whale.shopquanao.entity.Role;
 import com.whale.shopquanao.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Mapper(
         componentModel = "spring",

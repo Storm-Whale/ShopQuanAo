@@ -1,11 +1,7 @@
 package com.whale.shopquanao.controller;
 
-import com.whale.shopquanao.dto.request.CategoryRequest;
 import com.whale.shopquanao.dto.request.RoleRequest;
-import com.whale.shopquanao.dto.response.CategoryResponse;
 import com.whale.shopquanao.dto.response.RoleResponse;
-import com.whale.shopquanao.entity.Role;
-import com.whale.shopquanao.service.iservice.CategoryService;
 import com.whale.shopquanao.service.iservice.RoleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
